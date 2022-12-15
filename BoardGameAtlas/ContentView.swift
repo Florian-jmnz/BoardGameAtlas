@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var viewModel = BoardGameAtlasViewModel()
     var body: some View {
-        Text("Hello, world!")
-            .padding()
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+        TabView{
+            TopGamesView(viewModel: viewModel)
+        .tabItem{
+            Label("Top Games", systemImage: "star")
+            }
+            SearchView(viewModel: viewModel)
+        .tabItem{
+            Label("Search Games", systemImage: "magnifyingglass")
+            }
+        }
     }
 }
