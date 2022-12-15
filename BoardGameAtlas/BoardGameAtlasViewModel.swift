@@ -23,4 +23,8 @@ var currentnbGames = 0
         currentnbGames += 30
         }
     
+    func searchGames(search: String) async throws{
+        let gamesResponse = try await gameFetcher.searchGames(searchName: search)
+        searchedGames = gamesResponse.games
+        }
 }

@@ -17,6 +17,16 @@ struct TopGamesView: View {
                 games: viewModel.games
             )
             .navigationTitle(Text("Top games"))
+      ProgressView().onAppear(){
+            Task{
+                do{
+                try await viewModel.getGames()
+                }
+                catch{
+                    print(error)
+                }
+            }
+            }
         }
         }
 }
