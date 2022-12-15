@@ -31,5 +31,13 @@ class GameFetcher{
     }
     
     
+    func searchGames(searchName: String) async throws -> GamesResponse{
+        let urlGames = URL(string: "https://api.boardgameatlas.com/api/search?name=\(searchName.replacingOccurrences(of: " ", with: "%20"))&client_id=1pDSmlnFEx")!
+        let request = URLRequest(url: urlGames)
+        let (data, _) = try await URLSession.shared.data(for: request)
+        let jsonDecodeur = JSONDecoder()
+        let gamesResponse = try jsonDecodeur.decode(GamesResponse.self, from: data)
+        return gamesResponse
+    }
 
 }
